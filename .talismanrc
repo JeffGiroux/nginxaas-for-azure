@@ -1,5 +1,9 @@
 threshold: medium
 fileignoreconfig:
+- filename: appservers.tf
+  checksum: 9b8c2f1a89ee436e025a37c49e527d0fffa90538b5a446e70cb56d0419db5aa3
+- filename: function.tf
+  checksum: ae7b7464500f04a9d5f02123d0908af5c8ba8fa5b65083e2f61a111e6e021f22
 - filename: README.md
   checksum: 2c5d17de2fc13da89694f09aaa7bdf435fa2e8b9f899e5c46f866e0dd89332f2
 - filename: admin.auto.tfvars.example
