@@ -3,3 +3,5 @@ fileignoreconfig:
   checksum: 37305ca71f1cfdaf990ba04d4e209c3f9ddbd585d32d60f135ddc80b8caa6c02
 - filename: admin.auto.tfvars.example
   checksum: 157306380027d105a232b3662471c82a503ad0ce0f544eb218225773950e462c
+- filename: function-app/vmAutoscaleNginxConfig/vmssFunction.ps1
+  checksum: efc9774776873873cb3457064fed9273a9a891e967cc23817c08551a8e57ff31
