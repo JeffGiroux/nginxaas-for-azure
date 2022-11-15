@@ -1,3 +1,4 @@
+threshold: medium
 fileignoreconfig:
 - filename: README.md
   checksum: 2c5d17de2fc13da89694f09aaa7bdf435fa2e8b9f899e5c46f866e0dd89332f2
