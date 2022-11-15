@@ -4,7 +4,7 @@ variable "projectPrefix" {
 }
 variable "resourceOwner" {
   type        = string
-  description = "name of the person or customer running the solution"
+  description = "name of the person or customer running the demo"
 }
 
 variable "vnets" {

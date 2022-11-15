@@ -20,7 +20,7 @@
 
 ## Introduction
 
-This solution will create an [F5 NGINX for Azure](https://docs.nginx.com/nginx-for-azure) deployment and a set of Azure VNets for a demo application hosted in multiple Azure regions. The application will be running in the West and East regions, and NGINX will provide traffic management, security, and high availability across regions. This Terraform deployment uses the concept of "Day 1" for initial deployment and "Day 2" for ongoing operations. The former involves deploying infrastructure into Azure. The latter involves NGINX configuration updates.
+This demo will create an [F5 NGINX for Azure](https://docs.nginx.com/nginx-for-azure) deployment and a set of Azure VNets for a demo application hosted in multiple Azure regions. The application will be running in the West and East regions, and NGINX will provide traffic management, security, and high availability across regions. This Terraform deployment uses the concept of "Day 1" for initial deployment and "Day 2" for ongoing operations. The former involves deploying infrastructure into Azure. The latter involves NGINX configuration updates.
 
 The "Day 1" infrastructure deployment will consist of the following:
 
@@ -45,7 +45,7 @@ The "Day 2" operations will consist of the following:
 
 ## Configuration Example
 
-The following is an example configuration diagram for this solution deployment.
+The following is an example configuration diagram for this deployment.
 
 ![F5 NGINX for Azure](./images/nginx-multiple-region.png)
 
@@ -178,7 +178,7 @@ This demo automatically associates a managed identity to the NGINX deployment an
 ![NGINX Azure Monitor Metrics Explorer](./images/nginx-metrics-explorer.png)
 
 ## Cleanup
-- Run the solution destroy script:
+- Run the destroy script:
 ```bash
 ./destroy.sh
 ```
@@ -277,7 +277,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_projectPrefix"></a> [projectPrefix](#input\_projectPrefix) | prefix for resources | `string` | n/a | yes |
-| <a name="input_resourceOwner"></a> [resourceOwner](#input\_resourceOwner) | name of the person or customer running the solution | `string` | n/a | yes |
+| <a name="input_resourceOwner"></a> [resourceOwner](#input\_resourceOwner) | name of the person or customer running the demo | `string` | n/a | yes |
 | <a name="input_sshPublicKey"></a> [sshPublicKey](#input\_sshPublicKey) | public key used for authentication in ssh-rsa format | `string` | n/a | yes |
 | <a name="input_adminName"></a> [adminName](#input\_adminName) | admin account name used with app server instance | `string` | `"azureuser"` | no |
 | <a name="input_enableMetrics"></a> [enableMetrics](#input\_enableMetrics) | Enable publishing metrics data from NGINX deployment | `bool` | `true` | no |
