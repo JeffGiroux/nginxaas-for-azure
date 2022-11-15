@@ -89,10 +89,10 @@ az account show
 az account set -s <subscriptionId>
 ```
 
-- Clone the repo and open the solution's directory
+- Clone the repo and open the directory
 ```bash
-git clone https://github.com/f5devcentral/f5-digital-customer-engagement-center
-cd f5-digital-customer-engagement-center/solutions/delivery/application_delivery_controller/nginx/nginx-for-azure/
+git clone https://github.com/JeffGiroux/nginx-for-azure.git
+cd nginx-for-azure/
 ```
 
 - Create the tfvars file and update it with your settings.
