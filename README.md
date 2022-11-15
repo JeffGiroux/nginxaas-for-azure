@@ -20,7 +20,7 @@
 
 ## Introduction
 
-This solution will create an [F5 NGINX for Azure](https://docs.nginx.com/nginx-for-azure) deployment and a set of Azure VNets for a demo application hosted in multiple Azure regions. The application will be running in the West and East regions, and NGINX will provide traffic management, security, and high availability across regions. This Terraform deployment uses the concept of "Day 1" for initial deployment and "Day 2" for ongoing operatoins. The former involves deploying infrastructure into Azure. The latter involves NGINX configuration updates.
+This solution will create an [F5 NGINX for Azure](https://docs.nginx.com/nginx-for-azure) deployment and a set of Azure VNets for a demo application hosted in multiple Azure regions. The application will be running in the West and East regions, and NGINX will provide traffic management, security, and high availability across regions. This Terraform deployment uses the concept of "Day 1" for initial deployment and "Day 2" for ongoing operations. The former involves deploying infrastructure into Azure. The latter involves NGINX configuration updates.
 
 The "Day 1" infrastructure deployment will consist of the following:
 
