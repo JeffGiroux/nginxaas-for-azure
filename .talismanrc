@@ -5,3 +5,5 @@ fileignoreconfig:
   checksum: 157306380027d105a232b3662471c82a503ad0ce0f544eb218225773950e462c
 - filename: function-app/vmAutoscaleNginxConfig/vmssFunction.ps1
   checksum: efc9774776873873cb3457064fed9273a9a891e967cc23817c08551a8e57ff31
+- filename: templates/backend/index.html
+  checksum: cf4a128a699c72d6e2c6125e3c79816178c01f64a255e7840e2d5dc0afea333b
