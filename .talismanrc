@@ -1,6 +1,6 @@
 fileignoreconfig:
 - filename: README.md
-  checksum: 37305ca71f1cfdaf990ba04d4e209c3f9ddbd585d32d60f135ddc80b8caa6c02
+  checksum: 2c5d17de2fc13da89694f09aaa7bdf435fa2e8b9f899e5c46f866e0dd89332f2
 - filename: admin.auto.tfvars.example
   checksum: 157306380027d105a232b3662471c82a503ad0ce0f544eb218225773950e462c
 - filename: function-app/vmAutoscaleNginxConfig/vmssFunction.ps1
