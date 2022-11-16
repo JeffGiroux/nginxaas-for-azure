@@ -20,7 +20,7 @@
 
 ## Introduction
 
-This demo will create an [F5 NGINX for Azure](https://docs.nginx.com/nginx-for-azure) deployment and a set of Azure VNets for a demo application hosted in multiple Azure regions. The application will be running in the West and East regions, and NGINX will provide traffic management, security, and high availability across regions. This Terraform deployment uses the concept of "Day 1" for initial deployment and "Day 2" for ongoing operations. The former involves deploying infrastructure into Azure. The latter involves NGINX configuration updates.
+This demo will create an [F5 NGINX for Azure](https://docs.nginx.com/nginxaas/azure/) deployment and a set of Azure VNets for a demo application hosted in multiple Azure regions. The application will be running in the West and East regions, and NGINX will provide traffic management, security, and high availability across regions. This Terraform deployment uses the concept of "Day 1" for initial deployment and "Day 2" for ongoing operations. The former involves deploying infrastructure into Azure. The latter involves NGINX configuration updates.
 
 The "Day 1" infrastructure deployment will consist of the following:
 
@@ -135,7 +135,7 @@ Note: Depending on health checks and client request, you will either get the "We
 
 ## CI/CD Pipeline NGINX Configurations
 
-The NGINX configuration for this demo contains URL path routing and multiple upstream selections. The configuration is stored and managed in a GitHub repository, and it is pushed to the NGINX deployment through GitHub Actions using [NGINX Configuration Automation Workflows](https://docs.nginx.com/nginx-for-azure/management/nginx-configuration/#nginx-configuration-automation-workflows).
+The NGINX configuration for this demo contains URL path routing and multiple upstream selections. The configuration is stored and managed in a GitHub repository, and it is pushed to the NGINX deployment through GitHub Actions using [NGINX Configuration Automation Workflows](https://docs.nginx.com/nginxaas/azure/management/nginx-configuration/#nginx-configuration-automation-workflows).
 
 This demo also utilizes autoscale notify events to trigger Azure Functions running PowerShell. The PowerShell script collects IP addresses of all VM instances in the autoscale groups...aka the upstream servers. Why is this needed? The current implemementation of NGINX for Azure does not have service discovery. Additionally, the SaaS offering in Azure does not have an API to automatically add VMs to NGINX backend pools similar to how you can easily add VMs as targets to Azure Load Balancer or other Azure services. As a workaround, PowerShell is used to retrieve the IP addresses.
 
@@ -143,7 +143,7 @@ There are a few places in which you can adjust NGINX configurations for this dem
 
 ### Example Workflow #1: Modify nginx.conf in GitHub repository
 1. User has a requirement to add rate limiting
-2. Edit [nginx.conf](https://github.com/JeffGiroux/nginx-for-azure-configs/blob/main/configs/nginx.conf) to add rate limiting directives (see [Rate Limiting](https://docs.nginx.com/nginx-for-azure/management/rate-limiting/))
+2. Edit [nginx.conf](https://github.com/JeffGiroux/nginx-for-azure-configs/blob/main/configs/nginx.conf) to add rate limiting directives (see [Rate Limiting](https://docs.nginx.com/nginxaas/azure/management/rate-limiting/))
 3. Commit changes to repo
 4. GitHub Actions runs, creates tarball of configs, deploys to NGINX
 
@@ -173,7 +173,7 @@ Example below
 ```
 
 ## Monitor and Metrics
-This demo automatically associates a managed identity to the NGINX deployment and enables diagnostics. NGINX will publish application telemetry data to Azure Monitor, and you can review/analyze/alert on those metrics. See [Enable NGINX for Azure Monitoring](https://docs.nginx.com/nginx-for-azure/monitoring/enable-monitoring/) for more info.
+This demo automatically associates a managed identity to the NGINX deployment and enables diagnostics. NGINX will publish application telemetry data to Azure Monitor, and you can review/analyze/alert on those metrics. See [Enable NGINX for Azure Monitoring](https://docs.nginx.com/nginxaas/azure/monitoring/enable-monitoring/) for more info.
 
 ![NGINX Azure Monitor Metrics Explorer](./images/nginx-metrics-explorer.png)
 
@@ -190,8 +190,8 @@ Review the serial logs for the Azure virtual machine. Login to the Azure portal,
 
 ### NGINX for Azure
 Review the NGINX deployment logs and contact support. See the links below...
-- [Troubleshooting NGINX for Azure](https://docs.nginx.com/nginx-for-azure/troubleshooting/troubleshooting/)
-- [FAQ](https://docs.nginx.com/nginx-for-azure/troubleshooting/faq/)
+- [Troubleshooting NGINX for Azure](https://docs.nginx.com/nginxaas/azure/troubleshooting/troubleshooting/)
+- [FAQ](https://docs.nginx.com/nginxaas/azure/troubleshooting/faq/)
 
 ### Traffic Flows
 Review the high level diagram to see the architecture and understand traffic flows. If the NGINX deployment cannot access the application upstream servers, then please validate there arethe necessary Network Seurity Group rules, VNet peering, and DNS entries.
