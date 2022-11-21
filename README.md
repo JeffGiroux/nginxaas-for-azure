@@ -1,4 +1,4 @@
-# F5 NGINX for Azure Deployment with Demo Application in Multiple Regions
+# F5 NGINXaaS for Azure Deployment with Demo Application in Multiple Regions
 
 ## To Do
 
@@ -20,12 +20,12 @@
 
 ## Introduction
 
-This demo will create an [F5 NGINX for Azure](https://docs.nginx.com/nginxaas/azure/) deployment and a set of Azure VNets for a demo application hosted in multiple Azure regions. The application will be running in the West and East regions, and NGINX will provide traffic management, security, and high availability across regions. This Terraform deployment uses the concept of "Day 1" for initial deployment and "Day 2" for ongoing operations. The former involves deploying infrastructure into Azure. The latter involves NGINX configuration updates.
+This demo will create an [F5 NGINXaaS for Azure](https://docs.nginx.com/nginxaas/azure/) deployment and a set of Azure VNets for a demo application hosted in multiple Azure regions. The application will be running in the West and East regions, and NGINX will provide traffic management, security, and high availability across regions. This Terraform deployment uses the concept of "Day 1" for initial deployment and "Day 2" for ongoing operations. The former involves deploying infrastructure into Azure. The latter involves NGINX configuration updates.
 
 The "Day 1" infrastructure deployment will consist of the following:
 
 - F5 Dataplane Subscription (SaaS)
-  - NGINX for Azure deployment
+  - NGINXaaS for Azure deployment
   - Note: hidden, user will not see this
 - Shared VNet and subnets (customer Hub)
   - NGINX eNICs for [VNet injection](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-for-azure-services)
@@ -41,13 +41,13 @@ The "Day 1" infrastructure deployment will consist of the following:
 
 The "Day 2" operations will consist of the following:
 - NGINX configuration files stored in GitHub repository
-- NGINX for Azure configurations updated by GitHub Actions
+- NGINXaaS for Azure configurations updated by GitHub Actions
 
 ## Configuration Example
 
 The following is an example configuration diagram for this deployment.
 
-![F5 NGINX for Azure](./images/nginx-multiple-region.png)
+![F5 NGINXaaS for Azure](./images/nginx-multiple-region.png)
 
 ## Requirements
 
@@ -55,7 +55,7 @@ The following is an example configuration diagram for this deployment.
 - Terraform
 - Azure User with 'Owner' role to deploy resources
 - GitHub repository to store NGINX configurations
-  - [Sample repo](https://github.com/JeffGiroux/nginx-for-azure-configs) with requirements
+  - [Sample repo](https://github.com/JeffGiroux/nginxaas-for-azure-configs) with requirements
   - GitHub access token
   - GitHub secrets
   - Azure Key Vault secret
@@ -67,7 +67,7 @@ The following is an example configuration diagram for this deployment.
 ## Installation Example
 
 - Create a GitHub repository to store NGINX configurations
-  - [Sample repo](https://github.com/JeffGiroux/nginx-for-azure-configs) with requirements
+  - [Sample repo](https://github.com/JeffGiroux/nginxaas-for-azure-configs) with requirements
   - Complete all requirements from sample repo, then head back here
 
 - Authenticate your terminal session with AZ CLI and select subscription
@@ -91,8 +91,8 @@ az account set -s <subscriptionId>
 
 - Clone the repo and open the directory
 ```bash
-git clone https://github.com/JeffGiroux/nginx-for-azure.git
-cd nginx-for-azure/
+git clone https://github.com/JeffGiroux/nginxaas-for-azure.git
+cd nginxaas-for-azure/
 ```
 
 - Create the tfvars file and update it with your settings.
@@ -137,13 +137,13 @@ Note: Depending on health checks and client request, you will either get the "We
 
 The NGINX configuration for this demo contains URL path routing and multiple upstream selections. The configuration is stored and managed in a GitHub repository, and it is pushed to the NGINX deployment through GitHub Actions using [NGINX Configuration Automation Workflows](https://docs.nginx.com/nginxaas/azure/management/nginx-configuration/#nginx-configuration-automation-workflows).
 
-This demo also utilizes autoscale notify events to trigger Azure Functions running PowerShell. The PowerShell script collects IP addresses of all VM instances in the autoscale groups...aka the upstream servers. Why is this needed? The current implemementation of NGINX for Azure does not have service discovery. Additionally, the SaaS offering in Azure does not have an API to automatically add VMs to NGINX backend pools similar to how you can easily add VMs as targets to Azure Load Balancer or other Azure services. As a workaround, PowerShell is used to retrieve the IP addresses.
+This demo also utilizes autoscale notify events to trigger Azure Functions running PowerShell. The PowerShell script collects IP addresses of all VM instances in the autoscale groups...aka the upstream servers. Why is this needed? The current implemementation of NGINXaaS for Azure does not have service discovery. Additionally, the SaaS offering in Azure does not have an API to automatically add VMs to NGINX backend pools similar to how you can easily add VMs as targets to Azure Load Balancer or other Azure services. As a workaround, PowerShell is used to retrieve the IP addresses.
 
 There are a few places in which you can adjust NGINX configurations for this demo. Most configuration changes should occur in the nginx.conf file which is in the GitHub repo. However, if you find the need to adjust server line directives, ports, or other upstream settings, then you can also adjust the PowerShell script and reapply Terraform.
 
 ### Example Workflow #1: Modify nginx.conf in GitHub repository
 1. User has a requirement to add rate limiting
-2. Edit [nginx.conf](https://github.com/JeffGiroux/nginx-for-azure-configs/blob/main/configs/nginx.conf) to add rate limiting directives (see [Rate Limiting](https://docs.nginx.com/nginxaas/azure/management/rate-limiting/))
+2. Edit [nginx.conf](https://github.com/JeffGiroux/nginxaas-for-azure-configs/blob/main/configs/nginx.conf) to add rate limiting directives (see [Rate Limiting](https://docs.nginx.com/nginxaas/azure/management/rate-limiting/))
 3. Commit changes to repo
 4. GitHub Actions runs, creates tarball of configs, deploys to NGINX
 
@@ -173,7 +173,7 @@ Example below
 ```
 
 ## Monitor and Metrics
-This demo automatically associates a managed identity to the NGINX deployment and enables diagnostics. NGINX will publish application telemetry data to Azure Monitor, and you can review/analyze/alert on those metrics. See [Enable NGINX for Azure Monitoring](https://docs.nginx.com/nginxaas/azure/monitoring/enable-monitoring/) for more info.
+This demo automatically associates a managed identity to the NGINX deployment and enables diagnostics. NGINX will publish application telemetry data to Azure Monitor, and you can review/analyze/alert on those metrics. See [Enable NGINXaaS for Azure Monitoring](https://docs.nginx.com/nginxaas/azure/monitoring/enable-monitoring/) for more info.
 
 ![NGINX Azure Monitor Metrics Explorer](./images/nginx-metrics-explorer.png)
 
@@ -188,9 +188,9 @@ This demo automatically associates a managed identity to the NGINX deployment an
 ### Serial Logs of Application Servers (upstreams)
 Review the serial logs for the Azure virtual machine. Login to the Azure portal, open "Virtual Machines", then locate your instance...click it. Hit Serial Console. Then review the serial logs for errors.
 
-### NGINX for Azure
+### NGINXaaS for Azure
 Review the NGINX deployment logs and contact support. See the links below...
-- [Troubleshooting NGINX for Azure](https://docs.nginx.com/nginxaas/azure/troubleshooting/troubleshooting/)
+- [Troubleshooting NGINXaaS for Azure](https://docs.nginx.com/nginxaas/azure/troubleshooting/troubleshooting/)
 - [FAQ](https://docs.nginx.com/nginxaas/azure/troubleshooting/faq/)
 
 ### Traffic Flows
@@ -218,9 +218,9 @@ Submit a pull request
 | Name | Version |
 |------|---------|
 | <a name="provider_archive"></a> [archive](#provider\_archive) | 2.2.0 |
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.31.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.32.0 |
 | <a name="provider_local"></a> [local](#provider\_local) | 2.2.3 |
-| <a name="provider_null"></a> [null](#provider\_null) | 3.2.0 |
+| <a name="provider_null"></a> [null](#provider\_null) | 3.2.1 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.4.3 |
 
 ## Modules

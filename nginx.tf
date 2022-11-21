@@ -23,7 +23,7 @@ resource "azurerm_user_assigned_identity" "nginx" {
   }
 }
 
-############################ NGINX for Azure Deployment ############################
+############################ NGINXaaS for Azure Deployment ############################
 
 resource "azurerm_resource_group_template_deployment" "nginx" {
   name                = format("%s-nginx-%s", var.projectPrefix, random_id.buildSuffix.hex)
