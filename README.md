@@ -24,9 +24,10 @@ This demo will create an [F5 NGINXaaS for Azure](https://docs.nginx.com/nginxaas
 
 The "Day 1" infrastructure deployment will consist of the following:
 
-- F5 Dataplane Subscription (SaaS)
+- F5 Dataplane Subscription (NGINXaaS)
   - NGINXaaS for Azure deployment
   - Note: hidden, user will not see this
+  - See [NGINXaaS for Azure High-level Architecture](https://docs.nginx.com/nginxaas/azure/quickstart/architecture/)
 - Shared VNet and subnets (customer Hub)
   - NGINX eNICs for [VNet injection](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-for-azure-services)
   - Azure Function App with PowerShell code
@@ -137,7 +138,7 @@ Note: Depending on health checks and client request, you will either get the "We
 
 The NGINX configuration for this demo contains URL path routing and multiple upstream selections. The configuration is stored and managed in a GitHub repository, and it is pushed to the NGINX deployment through GitHub Actions using [NGINX Configuration Automation Workflows](https://docs.nginx.com/nginxaas/azure/management/nginx-configuration/#nginx-configuration-automation-workflows).
 
-This demo also utilizes autoscale notify events to trigger Azure Functions running PowerShell. The PowerShell script collects IP addresses of all VM instances in the autoscale groups...aka the upstream servers. Why is this needed? The current implemementation of NGINXaaS for Azure does not have service discovery. Additionally, the SaaS offering in Azure does not have an API to automatically add VMs to NGINX backend pools similar to how you can easily add VMs as targets to Azure Load Balancer or other Azure services. As a workaround, PowerShell is used to retrieve the IP addresses.
+This demo also utilizes autoscale notify events to trigger Azure Functions running PowerShell. The PowerShell script collects IP addresses of all VM instances in the autoscale groups...aka the upstream servers. Why is this needed? The current implemementation of NGINXaaS for Azure does not have service discovery. Additionally, the NGINXaaS offering in Azure does not have an API to automatically add VMs to NGINX backend pools similar to how you can easily add VMs as targets to Azure Load Balancer or other Azure services. As a workaround, PowerShell is used to retrieve the IP addresses.
 
 There are a few places in which you can adjust NGINX configurations for this demo. Most configuration changes should occur in the nginx.conf file which is in the GitHub repo. However, if you find the need to adjust server line directives, ports, or other upstream settings, then you can also adjust the PowerShell script and reapply Terraform.
 
